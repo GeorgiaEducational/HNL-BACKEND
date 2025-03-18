@@ -32,20 +32,20 @@ jobs:
           echo "RDS_DB_PORT=${{ secrets.RDS_DB_PORT }}"
           echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}"
 
-      - name: Run migrations
-        run: |
-          cd users  # Move into the users directory
-          
-          export RDS_DB_NAME="${{ secrets.RDS_DB_NAME }}"
-          export RDS_DB_USER="${{ secrets.RDS_DB_USER }}"
-          export RDS_DB_PASSWORD="${{ secrets.RDS_DB_PASSWORD }}"
-          export RDS_DB_HOST="${{ secrets.RDS_DB_HOST }}"
-          export RDS_DB_PORT="${{ secrets.RDS_DB_PORT }}"
-          
-          echo "RDS_DB_NAME=$RDS_DB_NAME"
-          echo "RDS_DB_HOST=$RDS_DB_HOST"
-          
-          python manage.py migrate
+#      - name: Run migrations
+#        run: |
+#          cd users  # Move into the users directory
+#
+#          export RDS_DB_NAME="${{ secrets.RDS_DB_NAME }}"
+#          export RDS_DB_USER="${{ secrets.RDS_DB_USER }}"
+#          export RDS_DB_PASSWORD="${{ secrets.RDS_DB_PASSWORD }}"
+#          export RDS_DB_HOST="${{ secrets.RDS_DB_HOST }}"
+#          export RDS_DB_PORT="${{ secrets.RDS_DB_PORT }}"
+#
+#          echo "RDS_DB_NAME=$RDS_DB_NAME"
+#          echo "RDS_DB_HOST=$RDS_DB_HOST"
+#
+#          python manage.py migrate
 
       - name: Install AWS Elastic Beanstalk CLI
         run: |
