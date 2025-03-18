@@ -24,6 +24,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug Environment Variables
+        run: |
+          echo "RDS_DB_NAME=${{ secrets.RDS_DB_NAME }}"
+          echo "RDS_DB_USER=${{ secrets.RDS_DB_USER }}"
+          echo "RDS_DB_HOST=${{ secrets.RDS_DB_HOST }}"
+          echo "RDS_DB_PORT=${{ secrets.RDS_DB_PORT }}"
+          echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}"
+
       - name: Run migrations
         env:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
