@@ -3,7 +3,7 @@ name: Deploy Django to Elastic Beanstalk
 on:
   push:
     branches:
-      - main  # შეცვალე შენი ძირითადი branch-ის სახელით
+      - main  # Change this if your main branch has a different name
 
 jobs:
   deploy:
@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd users  # Move into the users directory
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -32,6 +33,7 @@ jobs:
           RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
           RDS_PORT: ${{ secrets.RDS_PORT }}
         run: |
+          cd users  # Move into the users directory
           python manage.py migrate
 
       - name: Install AWS Elastic Beanstalk CLI
@@ -46,5 +48,6 @@ jobs:
           EB_APPLICATION_NAME: ${{ secrets.EB_APPLICATION_NAME }}
           EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}
         run: |
+          cd users  # Move into the users directory
           eb init $EB_APPLICATION_NAME --region $AWS_REGION --platform "Python 3.12"
           eb deploy $EB_ENVIRONMENT_NAME
