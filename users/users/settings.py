@@ -12,9 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 
+from dotenv import load_dotenv
+
 from pathlib import Path
 
 from datetime import timedelta
+
+load_dotenv("/opt/elasticbeanstalk/deployment/env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c$=8$c5s$@vcnhua_vf7dl7g5$sr&ozev))in)3o!m0$cej!8y'
+SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-in-dev")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
@@ -91,8 +94,12 @@ WSGI_APPLICATION = 'users.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('RDS_DB_NAME', 'your-db-name'),
+        'USER': os.getenv('RDS_DB_USER', 'your-db-user'),
+        'PASSWORD': os.getenv('RDS_DB_PASSWORD', 'your-db-password'),
+        'HOST': os.getenv('RDS_DB_HOST', 'your-db-endpoint.rds.amazonaws.com'),
+        'PORT': os.getenv('RDS_DB_PORT', '5432'),
     }
 }
 
