@@ -49,5 +49,5 @@ jobs:
           EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}
         run: |
           cd users  # Move into the users directory
-          eb init $EB_APPLICATION_NAME --region $AWS_REGION --platform "Python 3.12"
-          eb deploy $EB_ENVIRONMENT_NAME
+          ls -ltra
+          eb deploy
