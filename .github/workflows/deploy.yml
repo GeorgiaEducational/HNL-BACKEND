@@ -46,8 +46,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           EB_APPLICATION_NAME: ${{ secrets.EB_APPLICATION_NAME }}
-          EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          EB_ENVIRONMENT_NAME: ${{ secrets.EB_ENVIRONMENT_NAME }}  # Set it explicitly
         run: |
           cd users  # Move into the users directory
-          ls -ltra
-          eb deploy
+
+          # Verify that AWS CLI and EB CLI are available
+          aws --version
+          eb --version
+
+          # Debug Environment Variables
+          echo "EB_APPLICATION_NAME=$EB_APPLICATION_NAME"
+          echo "EB_ENVIRONMENT_NAME=$EB_ENVIRONMENT_NAME"
+
+          # Deploy
+          eb deploy $EB_ENVIRONMENT_NAME
