@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'users.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('RDS_DB_NAME', 'your-db-name'),
-        'USER': os.getenv('RDS_DB_USER', 'your-db-user'),
-        'PASSWORD': os.getenv('RDS_DB_PASSWORD', 'your-db-password'),
-        'HOST': os.getenv('RDS_DB_HOST', 'your-db-endpoint.rds.amazonaws.com'),
+        'NAME': os.getenv('RDS_DB_NAME', 'postgres'),
+        'USER': os.getenv('RDS_DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('RDS_DB_PASSWORD', 'localpassword'),
+        'HOST': os.getenv('RDS_DB_HOST', 'localhost'),
         'PORT': os.getenv('RDS_DB_PORT', '5432'),
     }
 }
