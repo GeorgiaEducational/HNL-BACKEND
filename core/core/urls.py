@@ -1,5 +1,5 @@
 """
-URL configuration for users project.
+URL configuration for core project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -23,7 +23,7 @@ from authentication.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/user/register/', UserCreate.as_view(), name='user_create'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -33,4 +33,3 @@ urlpatterns = [
     path('api/auth/user/', UserDetailView.as_view(), name='user_detail'),
     path('api/google/validate_token/', validate_google_token, name='validate_token'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

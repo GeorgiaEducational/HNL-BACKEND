@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth import get_user_model
 
 # configure django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "users.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 django.setup()
 
 User = get_user_model()

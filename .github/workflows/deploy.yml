@@ -33,7 +33,7 @@ jobs:
 #          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
 #          RDS_PORT: ${{ secrets.RDS_PORT }}
 #        run: |
-#          cd users  # Move into the users directory
+#          cd core  # Move into the core directory
 #          python manage.py migrate
 
       - name: Install AWS Elastic Beanstalk CLI
